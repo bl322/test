@@ -13,7 +13,7 @@
 				clear: both;
 				background-color: #dfe4eb;
 			}
-	
+
 			.container {
 				position: absolute;
 				width: 100%;
@@ -24,7 +24,7 @@
 				z-index: 1000;
 				visibility: visible;
 			}
-	
+
 			.btn {
 				--bg-color: #e5e5e5;
 				--font-color: #333;
@@ -49,12 +49,12 @@
 				background-position: right bottom;
 				background-image: linear-gradient(to right, var(--font-color) 50%, var(--bg-color) 50%);
 			}
-	
+
 			.btn:hover {
 				color: white;
 				background-position: left bottom;
 			}
-	
+
 			.tips {
 				display: none;
 				z-index: 1000;
@@ -86,7 +86,7 @@
 		</a-assets>
 		<!-- bg -->
 		<a-sky src="#bg" radius="15" rotation="2 0 -1"></a-sky>
-		
+
 		<!-- objs -->
 		<a-entity class="caec" position="-2 -5 13" rotation="180 0 0" visible="false"
 			event-set__mouseenter="scale: 1.2 1.2 1" event-set__mouseleave="scale: 1 1 1" canvas-updater>
@@ -100,7 +100,7 @@
 			event-set__mouseenter="scale: 1.2 1.2 1" event-set__mouseleave="scale: 1 1 1" canvas-updater>
 			<a-image src="#correct" width=".3" height=".3"></a-image>
 		</a-entity>
-		
+
 		<a-entity class="ow" position="1.31 -2 -3.3" rotation="0 40 90" visible="false"
 			event-set__mouseenter="scale: 1.2 1.2 1" event-set__mouseleave="scale: 1 1 1" canvas-updater>
 			<a-image class="link" src="#star" width="1" height="0.6"></a-image>
@@ -113,7 +113,7 @@
 			event-set__mouseenter="scale: 1.2 1.2 1" event-set__mouseleave="scale: 1 1 1" canvas-updater>
 			<a-image src="#correct" width=".3" height=".3"></a-image>
 		</a-entity>
-		
+
 		<a-entity class="boct" position="-3 3 -5" rotation="0 15 0" visible="false"
 			event-set__mouseenter="scale: 1.2 1.2 1" event-set__mouseleave="scale: 1 1 1" canvas-updater>
 			<a-image class="link" src="#star" width="1.5" height="0.9"></a-image>
@@ -126,7 +126,7 @@
 			event-set__mouseenter="scale: 1.2 1.2 1" event-set__mouseleave="scale: 1 1 1" canvas-updater>
 			<a-image src="#correct" width=".5" height=".5"></a-image>
 		</a-entity>
-		
+
 		<a-entity class="sfp" position="3.2 -4 -3.3" rotation="0 120 180" visible="false"
 			event-set__mouseenter="scale: 1.2 1.2 1" event-set__mouseleave="scale: 1 1 1" canvas-updater>
 			<a-image class="link" src="#star" width="1.3" height="1"></a-image>
@@ -149,7 +149,7 @@
 				<a-image class="link" src="#start" width=".8" height=".8"></a-image>
 			</a-entity>
 		</a-entity>
-		
+
 		<!-- text -->
 		<a-box color="#2468E2" width="2.2" height="2.6" position="2.4 0.8 -5" rotation="0 0 0" opacity="0.3"
 			depth="0.001">
@@ -175,8 +175,8 @@
 				</a-text>
 			</a-entity>
 		</a-box>
-		
-		
+
+
 		<!-- Camera + cursor. -->
 		<a-entity>
 			<a-entity camera look-controls wasd-controls id="camera">
@@ -192,7 +192,7 @@
 		</a-entity> 
 		<!-- end scene -->
 	</a-scene>
-	
+
 	<audio preload controls id="sound" visible="false">
 		<source src="static/sound.mp3" type="audio/mpeg">
 		<!-- <source src="static/gold_1.ogg" type="audio/ogg"> -->
@@ -214,15 +214,14 @@
 	</div>
 
 	<script>
-	var words =["caec","ow","boct","sfp"]  
- 	var end = 12 
- 	var aobj ={ 
- 		'caec':[0,3.46], 
- 		'ow':[3.75,6.2], 
- 		'boct':[6.35,8.3], 
-		 'sfp':[8.58,10.5] 
- 		} 
-
+		var words =["boct","ow","sfp","caec"]
+		var end = 12
+		var aobj ={
+			'boct':[0,2.1],
+			'ow':[2.2,4.9],
+			'sfp':[5.0,6.98],
+			'caec':[7.0,11]
+		}
 		let index = 0
 		let answer = ''
 		var flag = 0
@@ -255,7 +254,7 @@
 						answer = words[index]
 						console.log('answer=', answer,index,word);
 						flag = 0;
-						
+
 						let dur =Math.ceil((aobj[word][1] - aobj[word][0]) *1000) 
 						setTimeout(function() {
 							a.pause()
@@ -281,7 +280,7 @@
 					let _check = document.getElementsByClassName(className+'_check')[0]
 					let u_answer = className
 					// _select.setAttribute("visible", true);
-				
+
 					if (answer_timer) {
 						clearTimeout(answer_timer);
 					}
@@ -327,7 +326,7 @@
 									falsesound.play();
 									_check.children[0].setAttribute('src', "#wrong")
 									_check.setAttribute("visible", true)
-									
+
 									let dur =Math.ceil((aobj[word][1] - aobj[word][0]) *1000) 
 									setTimeout(function() {
 										sound.pause()
@@ -344,12 +343,12 @@
 								}
 							}
 						}, 5500);
-					
-					
+
+
 				})
-				
+
 				el.addEventListener('mouseleave', function(event){
-					
+
 					let _this = this;
 					// _this.setAttribute("visible", false);
 					let obj_name = _this.className
@@ -363,12 +362,12 @@
 						clearTimeout(answer_timer);
 						answer_timer = null;
 					}
-				
+
 				});
 			}
 		}
 		sceneInit()
-		
+
 		document.getElementsByClassName('btn')[0].addEventListener('click',function(){
 			var _this = this
 			// this.parentNode.style.visibility="hidden";
@@ -381,7 +380,7 @@
 			// alert(sound.currentTime)
 			sound.play();
 		})
-		
+
 		$(document).ready(function() {
 			document.getElementById('res-count').setAttribute("value", "Result(0/4)")
 		});
